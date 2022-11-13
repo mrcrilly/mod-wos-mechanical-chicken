@@ -1,0 +1,9 @@
+
+[worldserver]
+LevelTokens.Enable = 0
+LevelTokens.Daily.Enabled = 0
+LevelTokens.Weekly.Enabled = 0
+LevelTokens.Dungeon.Difficulty.Normal.Enabled = 0
+LevelTokens.Dungeon.Difficulty.Heroic.Enabled = 0
+LevelTokens.Dungeon.Difficulty.Epic.Enabled = 0
+LevelTokens.Chance.CreatureKill = 10
