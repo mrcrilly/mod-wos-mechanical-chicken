@@ -108,19 +108,11 @@ public:
     }
 };
 
-enum GossipId
-{
-    LEVELTOKEN_GOSSIP_TEXT = 68,
-    LEVELTOKEN_GOSSIP_HONOR = 100,
-};
-
-// const uint32 LEVELTOKEN_GOSSIP_HONOR_FOR_LEVEL = 101;
-
 class LevelTokensNPC : public CreatureScript
 {
 public:
 
-    LevelTokensNPC() : CreatureScript("leveltokens_npc") {}
+    LevelTokensNPC() : CreatureScript("npc_leveltokens") {}
 
     bool OnGossipHello(Player* player, Creature* creature)
     {

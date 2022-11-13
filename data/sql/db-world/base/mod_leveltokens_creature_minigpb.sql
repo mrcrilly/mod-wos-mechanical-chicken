@@ -14,7 +14,7 @@ SET
 @Type     := 7,
 @TypeFlags := 0,
 @FlagsExtra := 16777218,
-@Script     := "leveltokens_npc",
+@Script     := "npc_leveltokens",
 @StartingPositionX := -8823.121,
 @StartingPositionY := 646.99866,
 @StartingPositionZ := 94.477486,

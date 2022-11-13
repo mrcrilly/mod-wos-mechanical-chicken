@@ -61,3 +61,9 @@ uint32 cChanceForCreatureKill;
 // against their currency/bank.
 const std::string MSG_QUEST_COMPLETE = "You've earned a token! Trade it in for other prizes.";
 const std::string MSG_CREATURE_KILL = "Nice kill! Have a token for your troubles.";
+
+enum GossipId
+{
+    LEVELTOKEN_GOSSIP_TEXT = 68,
+    LEVELTOKEN_GOSSIP_HONOR = 100,
+};
