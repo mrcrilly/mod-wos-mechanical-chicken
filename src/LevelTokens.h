@@ -65,5 +65,7 @@ const std::string MSG_CREATURE_KILL = "Nice kill! Have a token for your troubles
 enum GossipId
 {
     LEVELTOKEN_GOSSIP_TEXT = 68,
-    LEVELTOKEN_GOSSIP_HONOR = 100,
+    LEVELTOKEN_GOSSIP_HONOR = 1000,
+    LEVELTOKEN_GOSSIP_HONOR_LEVEL = 1001,
+    LEVELTOKEN_GOSSIP_HONOR_LEVEL_ONE = 1002,
 };

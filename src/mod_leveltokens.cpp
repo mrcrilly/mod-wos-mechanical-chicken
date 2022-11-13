@@ -74,7 +74,7 @@ public:
             count += 3;
         }
 
-        player->AddItem(emblemOfHeroism, count);
+        player->AddItem(emblemOfValor, count);
         informPlayerOfPrize(player, MSG_QUEST_COMPLETE);
     }
 
@@ -82,6 +82,10 @@ public:
     {
         if (cDebugging) {
             LOG_ERROR("module", "Level Tokens (DEBUGGING): A player killed a creature: {} vs. {}", player->GetName(), victim->GetName());
+        }
+
+        if (!player->isHonorOrXPTarget(victim)) {
+            return; // has to yield XP or (PVP) honor
         }
 
         bool winner = false;
@@ -103,7 +107,7 @@ public:
 
         // Winner!
         // TODO: work on creature types to improve
-        player->AddItem(emblemOfHeroism, 1);
+        player->AddItem(emblemOfValor, 1);
         informPlayerOfPrize(player, MSG_CREATURE_KILL);
     }
 };
@@ -133,24 +137,41 @@ public:
 
         else if (action == LEVELTOKEN_GOSSIP_HONOR) {
             ClearGossipMenuFor(player);
-            AddGossipItemFor(player, GOSSIP_ICON_VENDOR, "I want to level", GOSSIP_SENDER_MAIN, LEVELTOKEN_GOSSIP_HONOR + 1);
+            AddGossipItemFor(player, GOSSIP_ICON_CHAT, "I want to level", GOSSIP_SENDER_MAIN, LEVELTOKEN_GOSSIP_HONOR_LEVEL);
             SendGossipMenuFor(player, LEVELTOKEN_GOSSIP_TEXT, creature->GetGUID());
         }
 
-        else if (action == LEVELTOKEN_GOSSIP_HONOR + 1) {
+        else if (action == LEVELTOKEN_GOSSIP_HONOR_LEVEL) {
             if (cDebugging) {
                 LOG_INFO("module", "Level Tokens (DEBUGGING): player opted to sell Emblem of Honor for a level...");
             }
 
-            OnGossipHello(player, creature);
+            ClearGossipMenuFor(player);
+            AddGossipItemFor(player, GOSSIP_ICON_CHAT, "I'd like one magic level boost, please! (3xEmblem of Valor)", GOSSIP_SENDER_MAIN, LEVELTOKEN_GOSSIP_HONOR_LEVEL_ONE);
+            SendGossipMenuFor(player, LEVELTOKEN_GOSSIP_TEXT, creature->GetGUID());
         }
 
-        else {
-            if (cDebugging) {
-                LOG_INFO("module", "Level Tokens (DEBUGGING): the player selected an unknown option");
+        else if (action == LEVELTOKEN_GOSSIP_HONOR_LEVEL_ONE) {
+            uint32 emblem_count = player->GetItemCount(emblemOfValor, true);
+            LOG_INFO("module", "Level Tokens (DEBUGGING): the player has {} emblems", emblem_count);
+
+            if (emblem_count < 3) {
+                ChatHandler(player->GetSession()).SendSysMessage("You need more Emblems for that service, sorry!");
+                CloseGossipMenuFor(player);
+                return true;
             }
 
-            OnGossipHello(player, creature);
+            uint32 player_level = player->getLevel();
+
+            if (player_level == 80) {
+                ChatHandler(player->GetSession()).SendSysMessage("You can't level anymore! You're already at max cap. Maybe buy a trinket?");
+                CloseGossipMenuFor(player);
+                return true;
+            }
+
+            player->DestroyItemCount(emblemOfValor, 3, true);
+            player->GiveLevel(player_level + 1);
+            CloseGossipMenuFor(player);
         }
 
         return true;
