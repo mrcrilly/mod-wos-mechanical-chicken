@@ -85,6 +85,9 @@ public:
         }
 
         if (!player->isHonorOrXPTarget(victim)) {
+            if(cDebugging) {
+                LOG_ERROR("module", "- Level Tokens (DEBUGGING): kill did not yield experience. ignoring");
+            }
             return; // has to yield XP or (PVP) honor
         }
 
