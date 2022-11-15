@@ -1,7 +1,7 @@
 
-void AddLevelTokensScripts();
+void AddWoSScripts();
 
-void Addmod_leveltokensScripts()
+void Addmod_wosScripts()
 {
-    AddLevelTokensScripts();
+    AddWoSScripts();
 }

@@ -1,0 +1,18 @@
+
+[worldserver]
+
+WorldOfSolocraft.Enable = 1
+WorldOfSolocraft.Debugging = 0
+
+WorldOfSolocraft.Daily.Enabled = 1
+WorldOfSolocraft.Weekly.Enabled = 1
+WorldOfSolocraft.Dungeon.Difficulty.Normal.Enabled = 1
+WorldOfSolocraft.Dungeon.Difficulty.Heroic.Enabled = 1
+WorldOfSolocraft.Dungeon.Difficulty.Epic.Enabled = 1
+
+WorldOfSolocraft.Chance.Kill = 5
+WorldOfSolocraft.Chance.KillElite = 10
+
+WorldOfSolocraft.Costs.Valor.Leveling = 1
+WorldOfSolocraft.Costs.Valor.DalaranTeleport = 5
+WorldOfSolocraft.Costs.Valor.FlightPaths = 5
