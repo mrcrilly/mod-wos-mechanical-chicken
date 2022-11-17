@@ -50,55 +50,14 @@ const uint32 emblemOfHeroism = 40752;
 // creatures (of any kind, anywhere.)
 const uint32 emblemOfValor = 40753;
 
-// Configuration
-// Simple on/off switches
-bool cDebugging = true;
-bool cModuleEnabled;
-bool cDailyQuestsEnabled;
-bool cWeeklyQuestsEnabled;
-bool cDungeonDifficultyNormalEnabled;
-bool cDungeonDifficultyHeroicEnabled;
-bool cDungeonDifficultyEpicEnabled;
+// Items of sale
+const uint32 mechanicalChicken = 10398;
+const uint32 mechanicalChickenOil = 17058;
 
-// Costs and odds/chances
-uint32 cDropChanceAfterKill;
-uint32 cDropChanceAfterKillElite;
-uint32 cEmblemOfValorPerLevel;
-uint32 cEmblemOfValorDalaranTeleport;
-uint32 cEmblemOfValorFlightPaths;
+// Sounds used for various things
+const uint32 CHICKEN_TELEPORT_SOUND = 12973;
 
 // The messages used to inform the player of actions taken
 // against their currency/bank.
 const std::string MSG_QUEST_COMPLETE = "You've earned a token! Trade it in for other prizes.";
 const std::string MSG_CREATURE_KILL = "Nice kill! Have a token for your troubles.";
-
-enum GossipId
-{
-    // The basic "Greetings, $n"
-    WOS_GOSSIP_TEXT = 68,
-
-    // Custom greetings/text
-    WOS_GOSSIP_CHITCHAT_DALARAN_TELEPORT = 3000000,
-    WOS_GOSSIP_CHITCHAT_FLIGHT_PATHS = 3000001,
-    WOS_GOSSIP_CHITCHAT_LEVEL = 3000002,
-
-    // The Emblem of Honor gossip menus
-    // Top level menu:
-    WOS_GOSSIP_VALOR = 1000,
-
-    // I want to boost my level as the grind it too much
-    WOS_GOSSIP_VALOR_LEVEL = 1100,
-    WOS_GOSSIP_VALOR_LEVEL_ONE = 1101,
-    WOS_GOSSIP_VALOR_LEVEL_TWO = 1102,
-    WOS_GOSSIP_VALOR_LEVEL_THREE = 1103,
-    WOS_GOSSIP_VALOR_LEVEL_FIVE = 1104,
-
-    // I want to learn about flight master locations
-    WOS_GOSSIP_VALOR_FLIGHT_PATHS = 1200,
-    WOS_GOSSIP_VALOR_FLIGHT_PATHS_CONFIRM = 1201,
-
-    // I need a quick get away to Dalaran, stat!
-    WOS_GOSSIP_VALOR_DALARAN_TELEPORT = 1300,
-    WOS_GOSSIP_VALOR_DALARAN_TELEPORT_CONFIRM = 1301,
-    WOS_GOSSIP_VALOR_DALARAN_TELEPORT_BEG = 1302,
-};

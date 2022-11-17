@@ -11,8 +11,13 @@ WorldOfSolocraft.Dungeon.Difficulty.Heroic.Enabled = 1
 WorldOfSolocraft.Dungeon.Difficulty.Epic.Enabled = 1
 
 WorldOfSolocraft.Chance.Kill = 5
-WorldOfSolocraft.Chance.KillElite = 10
+WorldOfSolocraft.Chance.KillElite = 8
 
-WorldOfSolocraft.Costs.Valor.Leveling = 1
+WorldOfSolocraft.Costs.Valor.Leveling = 2
 WorldOfSolocraft.Costs.Valor.DalaranTeleport = 5
-WorldOfSolocraft.Costs.Valor.FlightPaths = 5
+WorldOfSolocraft.Costs.Valor.FlightPaths = 15
+WorldOfSolocraft.Costs.Valor.MechanicalChicken = 20
+WorldOfSolocraft.Costs.Valor.MechanicalChickenOil = 2
+
+WorldOfSolocraft.MechanicalChicken.OilCostPerTeleport = 1
+
