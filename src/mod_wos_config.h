@@ -16,3 +16,5 @@ uint32 cEmblemOfValorFlightPaths;
 uint32 cCostOfMechanicalChicken;
 uint32 cCostOfMechanicalChickenOil;
 uint32 cCostOfMechanicalChickenOilPerTeleport;
+
+uint32 cCostOfMount;

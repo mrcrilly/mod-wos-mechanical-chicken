@@ -18,6 +18,5 @@ WorldOfSolocraft.Costs.Valor.DalaranTeleport = 5
 WorldOfSolocraft.Costs.Valor.FlightPaths = 15
 WorldOfSolocraft.Costs.Valor.MechanicalChicken = 20
 WorldOfSolocraft.Costs.Valor.MechanicalChickenOil = 2
-
 WorldOfSolocraft.MechanicalChicken.OilCostPerTeleport = 1
-
+WorldOfSolocraft.Costs.Valor.Mount = 15

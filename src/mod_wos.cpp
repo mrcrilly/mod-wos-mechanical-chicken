@@ -9,7 +9,7 @@
 #include "Config.h"
 #include "Chat.h"
 
-// Level Tokens
+// WoS
 #include "mod_wos_general.h"
 #include "mod_wos_locations.h"
 #include "mod_wos_gossip.h"
@@ -50,6 +50,11 @@ public:
         {
             ChatHandler(player->GetSession()).SendSysMessage("This realm uses Level Tokens - you lucky bastard!");
         }
+
+        Mail* newMail = new Mail;
+        newMail->body = "There's a new";
+        newMail->subject = "A new threat!";
+        player->AddMail(newMail);
     }
 
     void OnPlayerCompleteQuest(Player* player, Quest const* quest) override
@@ -363,8 +368,9 @@ public:
         // #############
         else if (action == WOS_MM_GOSSIP_VALOR) {
             ClearGossipMenuFor(player);
-            AddGossipItemFor(player, GOSSIP_ICON_CHAT, "I want to boost my level", GOSSIP_SENDER_MAIN, WOS_MM_GOSSIP_VALOR_LEVEL);
+            AddGossipItemFor(player, GOSSIP_ICON_CHAT, "I want to boost my level...", GOSSIP_SENDER_MAIN, WOS_MM_GOSSIP_VALOR_LEVEL);
             AddGossipItemFor(player, GOSSIP_ICON_CHAT, "I need to get to Dalaran!", GOSSIP_SENDER_MAIN, WOS_MM_GOSSIP_VALOR_DALARAN_TELEPORT);
+            AddGossipItemFor(player, GOSSIP_ICON_CHAT, "I'd kill for a mount...", GOSSIP_SENDER_MAIN, WOS_MM_GOSSIP_VALOR_BUY_MOUNT);
             AddGossipItemFor(player, GOSSIP_ICON_CHAT, "About these mechanical chickens...", GOSSIP_SENDER_MAIN, WOS_MM_GOSSIP_VALOR_MECHANICAL_CHICKEN);
             SendGossipMenuFor(player, WOS_MM_GOSSIP_TEXT, creature->GetGUID());
         }
@@ -507,7 +513,7 @@ public:
             std::tie(player_can_afford_service, emblem_count) = playerHasEnoughEmblems(player, cCostOfMechanicalChicken);
 
             if (!player_can_afford_service) {
-                ChatHandler(player->GetSession()).SendSysMessage("Do you know how COMPLEX these chickens are to make?! Get out of here...");
+                ChatHandler(player->GetSession()).SendSysMessage("Do you know how COMPLEX these chickens are to make?! NO FREEBIES!!");
                 CloseGossipMenuFor(player);
             }
             else {
@@ -531,6 +537,86 @@ public:
                 CloseGossipMenuFor(player);
                 player->DestroyItemCount(emblemOfValor, cCostOfMechanicalChickenOil, true);
                 player->AddItem(mechanicalChickenOil, 5);
+            }
+        }
+
+        // #####
+        // MOUNT
+        // #####
+
+        else if (action == WOS_MM_GOSSIP_VALOR_BUY_MOUNT) {
+            if (cDebugging) {
+                LOG_INFO("module", "{}: player opted to sell Emblem of Honor for a mount and training...", debuggingPrefix);
+            }
+
+            const std::string chicken = "Sounds great! I'll take one mount, please! (x" + std::to_string(cCostOfMount) + " Emblem of Valor)";
+
+            ClearGossipMenuFor(player);
+            AddGossipItemFor(player, GOSSIP_ICON_CHAT, chicken, GOSSIP_SENDER_MAIN, WOS_MM_GOSSIP_VALOR_BUY_MOUNT_BUY);
+            SendGossipMenuFor(player, WOS_MM_GOSSIP_CHITCHAT_MOUNT, creature->GetGUID());
+        }
+
+        else if (action == WOS_MM_GOSSIP_VALOR_BUY_MOUNT_BUY) {
+            uint32 emblem_count;
+            bool player_can_afford_service;
+            std::tie(player_can_afford_service, emblem_count) = playerHasEnoughEmblems(player, cCostOfMount);
+
+            if (!player_can_afford_service) {
+                ChatHandler(player->GetSession()).SendSysMessage("Look buddy, that oil is a pain to bottle up, and you want it for FREE? Get a grip!");
+                CloseGossipMenuFor(player);
+            }
+            else {
+                CloseGossipMenuFor(player);
+                player->DestroyItemCount(emblemOfValor, cCostOfMount, true);
+
+                // Teach the player how-to ride this mount if their skill level
+                // is < 75
+                if (!(player->GetSkillValue(SKILL_RIDING) >= 75)) {
+                    player->SetSkill(SKILL_RIDING, 0, 75, 75);
+                }
+
+                uint32 playerTeam = player->GetTeamId();
+                uint32 playerRace = player->getRace();
+
+                if (playerTeam == TEAM_ALLIANCE) {
+                    switch (playerRace) {
+                    case RACE_HUMAN:
+                        player->AddItem(mountAllianceHumanBasic, 1);
+                        break;
+                    case RACE_DWARF:
+                        player->AddItem(mountAllianceDwarfBasic, 1);
+                        break;
+                    case RACE_NIGHTELF:
+                        player->AddItem(mountAllianceNightElfBasic, 1);
+                        break;
+                    case RACE_GNOME:
+                        player->AddItem(mountAllianceGnomeBasic, 1);
+                        break;
+                    case RACE_DRAENEI:
+                        player->AddItem(mountAllianceDraeneiBasic, 1);
+                        break;
+                    }
+                }
+
+                else if (playerTeam == TEAM_HORDE) {
+                    switch (playerRace) {
+                    case RACE_ORC:
+                        player->AddItem(mountHordeOrcBasic, 1);
+                        break;
+                    case RACE_UNDEAD_PLAYER:
+                        player->AddItem(mountHordeUndeadBasic, 1);
+                        break;
+                    case RACE_TAUREN:
+                        player->AddItem(mountHordeTaurenBasic, 1);
+                        break;
+                    case RACE_TROLL:
+                        player->AddItem(mountHordeTrollBasic, 1);
+                        break;
+                    case RACE_BLOODELF:
+                        player->AddItem(mountHordeBloodElfBasic, 1);
+                        break;
+                    }
+                }
             }
         }
 
@@ -633,6 +719,7 @@ public:
         cEmblemOfValorFlightPaths = sConfigMgr->GetOption<uint32>("WorldOfSolocraft.Costs.Valor.Leveling", 5);
         cCostOfMechanicalChicken = sConfigMgr->GetOption<uint32>("WorldOfSolocraft.Costs.Valor.MechanicalChicken", 20);
         cCostOfMechanicalChickenOil = sConfigMgr->GetOption<uint32>("WorldOfSolocraft.Costs.Valor.MechanicalChickenOil", 2);
+        cCostOfMount = sConfigMgr->GetOption<uint32>("WorldOfSolocraft.Costs.Valor.Mount", 15);
 
         // Mechanical Chicken related
         cCostOfMechanicalChickenOilPerTeleport = sConfigMgr->GetOption<uint32>("WorldOfSolocraft.MechanicalChicken.OilCostPerTeleport", 1);

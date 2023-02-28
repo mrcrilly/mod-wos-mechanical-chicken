@@ -19,7 +19,7 @@ const std::vector<int> fortune_cookies{
     19249, // Sayge's Fortune #14
     19250, // Sayge's Fortune #15
     19251, // Sayge's Fortune #16
-    // Change is order NOT a mistake - don't "fix"
+    // Change in order NOT a mistake - don't "fix"
     19253, // Sayge's Fortune #17
     19252, // Sayge's Fortune #18
     19237, // Sayge's Fortune #19
@@ -61,3 +61,16 @@ const uint32 CHICKEN_TELEPORT_SOUND = 12973;
 // against their currency/bank.
 const std::string MSG_QUEST_COMPLETE = "You've earned a token! Trade it in for other prizes.";
 const std::string MSG_CREATURE_KILL = "Nice kill! Have a token for your troubles.";
+
+// Mounts
+const uint32 mountAllianceHumanBasic = 2411;
+const uint32 mountAllianceDwarfBasic = 5864;
+const uint32 mountAllianceNightElfBasic = 8629;
+const uint32 mountAllianceGnomeBasic = 13322;
+const uint32 mountAllianceDraeneiBasic = 28481;
+const uint32 mountHordeOrcBasic = 5665;
+const uint32 mountHordeUndeadBasic = 13331;
+const uint32 mountHordeTaurenBasic = 15277;
+const uint32 mountHordeTrollBasic = 8588;
+const uint32 mountHordeBloodElfBasic = 29221;
+

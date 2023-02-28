@@ -21,6 +21,7 @@ enum GossipId
     WOS_MM_GOSSIP_CHITCHAT_FLIGHT_PATHS = 3000001,
     WOS_MM_GOSSIP_CHITCHAT_LEVEL = 3000002,
     WOS_MM_GOSSIP_CHITCHAT_MECHANICAL_CHICKEN = 3000003,
+    WOS_MM_GOSSIP_CHITCHAT_MOUNT = 3000004,
 
 
     // I want to boost my level as the grind it too much
@@ -43,6 +44,10 @@ enum GossipId
     WOS_MM_GOSSIP_VALOR_MECHANICAL_CHICKEN_BUY = 1401,
     WOS_MM_GOSSIP_VALOR_MECHANICAL_CHICKEN_OIL_BUY = 1402,
 
+    // I want to buy a mount
+    WOS_MM_GOSSIP_VALOR_BUY_MOUNT = 1500,
+    WOS_MM_GOSSIP_VALOR_BUY_MOUNT_BUY = 1501,
+
     // ###################
     // Mechanical Chicken
     // ###################
@@ -59,4 +64,5 @@ enum GossipId
     WOS_MC_GOSSIP_TAKE_ME_TO_SHATTRATH = 2108,
     WOS_MC_GOSSIP_TAKE_ME_TO_DALARAN_ALLIANCE = 2109,
     WOS_MC_GOSSIP_TAKE_ME_TO_DALARAN_HORDE = 2110,
+
 };
