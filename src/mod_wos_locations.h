@@ -79,6 +79,35 @@ const LocationVector WOS_PLAYER_TELEPORT_LOC_THUNDER_BLUFF = LocationVector(-952
 // EASTERN KINGDOMS
 // #################
 
+// Stages
+
+// Bad Lands
+const LocationVector WOS_PLAYER_TELEPORT_LOC_STAGE_ONE = LocationVector(
+    -7088.657,                  // X
+    -2531.330,                  // Y
+    381.125,                    // Z
+    0.1612,                     // Orientation
+    MAP_EASTERN_KINGDOMS        // Map ID
+);
+
+// Northrend: Lich King (Entry = 33441)
+const LocationVector WOS_PLAYER_TELEPORT_LOC_STAGE_TWO = LocationVector(
+    5655.326,                   // X
+    2008.859,                   // Y
+    1544.129,                   // Z
+    3.600,                      // Orientation
+    MAP_NORTHREND               // Map ID
+);
+
+// Stormwind Sewer (Sewer Beast = 3581)
+const LocationVector WOS_PLAYER_TELEPORT_LOC_STAGE_THREE = LocationVector(
+    -8491.636,                  // X
+    699.405,                    // Y
+    89.869,                     // Z
+    0.653,                      // Orientation
+    MAP_EASTERN_KINGDOMS        // Map ID
+);
+
 // Stormwind
 const LocationVector WOS_CLONE_LOC_STORMWIND = LocationVector(-9002.942, 874.0727, 129.69243, 4.782641, MAP_EASTERN_KINGDOMS);
 const LocationVector WOS_PLAYER_TELEPORT_LOC_STORMWIND = LocationVector(-9003.969, 871.0497, 129.69241, 1.322178, MAP_EASTERN_KINGDOMS);
